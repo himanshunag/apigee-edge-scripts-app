@@ -10,9 +10,9 @@ st.set_page_config(
 # Initialize session state for configuration and token storage
 if "config" not in st.session_state:
     st.session_state.config = {
-        "org_name": "",
-        "env_name": "",
-        "username": "",
+        "org_name": "financialdataexchange",
+        "env_name": "dev",
+        "username": "prakat@financialdataexchange.org",
         "password": ""
     }
 if "show_config_form" not in st.session_state:
@@ -181,17 +181,20 @@ if st.session_state.show_config_form:
         org_name = st.text_input(
             "Edge Organization Name",
             value=st.session_state.config["org_name"],
-            placeholder="e.g., myorg"
+            placeholder="e.g., myorg",
+            disabled=True
         )
         env_name = st.text_input(
             "Environment Name",
             value=st.session_state.config["env_name"],
-            placeholder="e.g., prod"
+            placeholder="e.g., prod",
+            disabled=True
         )
         username = st.text_input(
             "Username",
             value=st.session_state.config["username"],
-            placeholder="Your Apigee username"
+            placeholder="Your Apigee username",
+            disabled=True
         )
         password = st.text_input(
             "Password",
