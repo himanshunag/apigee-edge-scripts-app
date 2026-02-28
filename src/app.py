@@ -1,6 +1,18 @@
 import streamlit as st
 import subprocess
 import json
+import sys
+import os
+
+# Add parent directory to path to import init_deps
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Ensure npm dependencies are installed
+try:
+    from init_deps import ensure_npm_dependencies
+    ensure_npm_dependencies()
+except ImportError:
+    pass
 
 st.set_page_config(
     page_title="Forgecrux - Apigee Edge Management",
@@ -19,17 +31,6 @@ if "show_config_form" not in st.session_state:
     st.session_state.show_config_form = False
 if "access_token" not in st.session_state:
     st.session_state.access_token = None
-if "npm_installed" not in st.session_state:
-    st.session_state.npm_installed = False
-
-# Install npm dependencies on first run
-import os
-if not st.session_state.npm_installed and not os.path.exists("node_modules"):
-    try:
-        subprocess.run(["npm", "install"], cwd=".", capture_output=True, check=True)
-        st.session_state.npm_installed = True
-    except Exception as e:
-        st.error(f"Failed to install npm dependencies: {e}")
 
 # Custom CSS for Orange & Green theme
 st.markdown("""
