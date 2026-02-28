@@ -159,6 +159,21 @@ st.markdown("""
             background-color: #E8F5E9 !important;
             border-left: 5px solid #2E7D32 !important;
         }
+        
+        /* Hide settings button and toolbar */
+        [data-testid="baseButton-secondary"] {
+            display: none !important;
+        }
+        
+        /* Hide entire toolbar */
+        [data-testid="stToolbar"] {
+            display: none !important;
+        }
+        
+        /* Hide top right menu buttons */
+        .stAppHeader button {
+            display: none !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 
