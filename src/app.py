@@ -19,6 +19,17 @@ if "show_config_form" not in st.session_state:
     st.session_state.show_config_form = False
 if "access_token" not in st.session_state:
     st.session_state.access_token = None
+if "npm_installed" not in st.session_state:
+    st.session_state.npm_installed = False
+
+# Install npm dependencies on first run
+import os
+if not st.session_state.npm_installed and not os.path.exists("node_modules"):
+    try:
+        subprocess.run(["npm", "install"], cwd=".", capture_output=True, check=True)
+        st.session_state.npm_installed = True
+    except Exception as e:
+        st.error(f"Failed to install npm dependencies: {e}")
 
 # Custom CSS for Orange & Green theme
 st.markdown("""
